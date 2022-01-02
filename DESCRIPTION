@@ -1,0 +1,13 @@
+Package: ga4WebDash
+Title: Google Analytics 4 web analytics Shiny application
+Version: 0.0.1
+Authors@R: person(given = "Collin",
+    family = "Berke",
+    role = c("aut", "cre"),
+    email = "collin.berke@gmail.com")
+Description: What the package does (one paragraph).
+License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
+    license
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
