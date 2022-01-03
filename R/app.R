@@ -9,7 +9,6 @@ ga4App <- function(...){
 
   ui <- fluidPage(
     h1("Merchandise Store Summary Report"),
-    #> Inputs
     sidebarLayout(
       sidebarPanel(
         dateRangeInput("date",
@@ -21,14 +20,7 @@ ga4App <- function(...){
         )
       ),
       mainPanel(
-        fluidRow(
-          h3("Users"),
-          plotOutput("user_trend"),
-          h3("Purchases"),
-          plotOutput("purchase_trend"),
-          h4("Users & Purchases Table"),
-          dataTableOutput("table")
-        )
+        trendVisTableOutput("trend_vis")
       )
     )
   )
@@ -43,29 +35,7 @@ ga4App <- function(...){
         )
     })
 
-    output$user_trend <- renderPlot({
-      ggplot(data(), aes(x = event_date, y = users)) +
-        geom_line(size = 2) +
-        labs(x = "", y = "Users") +
-        theme_minimal() +
-        theme(
-          axis.text = element_text(size = 14),
-          panel.grid.minor = element_blank()
-        )
-    })
-
-    output$purchase_trend <- renderPlot({
-      ggplot(data(), aes(x = event_date, y = purchase)) +
-        geom_line(size = 2) +
-        labs(x = "", y = "Purchases") +
-        theme_minimal() +
-        theme(
-          axis.text = element_text(size = 14),
-          panel.grid.minor = element_blank()
-        )
-    })
-
-    output$table <- renderDataTable(clean_col_names(data()), options = list(pageLength = 14))
+    trendVisTableServer("trend_vis", reactive(data()))
 
   }
 
